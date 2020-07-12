@@ -1,6 +1,18 @@
 package com.example.lesson.entity
 
-internal class Lesson {//internal 当前模块可见
+internal class Lesson constructor(var date: String?, var content: String?, var state: State?) {//internal 当前模块可见
+
+//    //    private var date: String? = null  //private 修饰的 不能自动生成public的 get/set
+//    var date: String? = null  //会自动生成get/set 不需要再写
+//    var content: String? = null
+//    var state: State? = null
+
+//    init {
+//        this.date = date
+//        this.content = content
+//        this.state = state
+//    }
+
     enum class State {
         PLAYBACK {
             override fun stateName(): String {
@@ -21,38 +33,29 @@ internal class Lesson {//internal 当前模块可见
         abstract fun stateName(): String?
     }
 
-    private var date: String? = null  //private 修饰的 不能自动生成public的 get/set
-    private var content: String? = null
-    private var state: State? = null
 
-    constructor(date: String?, content: String?, state: State?) {
-        this.date = date
-        this.content = content
-        this.state = state
-    }
-
-    fun getState(): State? {
-        return state
-    }
-
-    fun setState(state: State?) {
-        this.state = state
-    }
-
-    fun getDate(): String? {
-        return date
-    }
-
-    fun setDate(date: String?) {
-        this.date = date
-    }
-
-    fun getContent(): String? {
-        return content
-    }
-
-    fun setContent(content: String?) {
-        this.content = content
-    }
+//    fun getState(): State? {
+//        return state
+//    }
+//
+//    fun setState(state: State?) {
+//        this.state = state
+//    }
+//
+//    fun getDate(): String? {
+//        return date
+//    }
+//
+//    fun setDate(date: String?) {
+//        this.date = date
+//    }
+//
+//    fun getContent(): String? {
+//        return content
+//    }
+//
+//    fun setContent(content: String?) {
+//        this.content = content
+//    }
 
 }

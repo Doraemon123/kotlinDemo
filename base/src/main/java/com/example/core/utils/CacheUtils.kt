@@ -6,7 +6,7 @@ import com.example.core.BaseApplication
 import com.example.core.R
 
 object CacheUtils {
-    private val context: Context = BaseApplication.currentApplication()
+    private val context: Context = BaseApplication.currentApplication
 
     private val SP: SharedPreferences = context.getSharedPreferences(context.getString(R.string.app_name), Context.MODE_PRIVATE)
 
@@ -15,9 +15,10 @@ object CacheUtils {
         SP.edit().putString(key, value).apply()
     }
 
-    fun get(key: String): String? {
-        return SP.getString(key, null)
-    }
-
+    //    fun get(key: String): String? {
+//        return SP.getString(key, null)
+//    }
+    //函数类型推断
+    fun get(key: String) = SP.getString(key, null)
 
 }

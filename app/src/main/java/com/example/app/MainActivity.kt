@@ -41,8 +41,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val btn_login = findViewById<Button>(R.id.btn_login)
 //        val findViewById = getDelegate().findViewById<Button>(R.id.btn_login)
         val img_code = findViewById<CodeView>(R.id.code_view)
+        //构造函数默认值法
+//        var codeView=CodeView(this)
+//        var codeView=CodeView(this,null)
         btn_login.setOnClickListener(this)
         img_code.setOnClickListener(this)
+
+
     }
 
     override fun onClick(v: View?) {
@@ -62,23 +67,29 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val code: String = et_code.text.toString()
         //没有new
         val user = User(username, password, code)
-        if (verify(user)) {
+        //函数嵌套 会生成对象！！不要频繁调用
+        fun verify(): Boolean {//可以访问外部变量
+            //user.username == null || user.username!!.length < 4
+            // String var10000 = user.getUsername(); if ((var10000 != null ? var10000.length() : 0) < 4)
+            if (user.username?.length?:0<4) {//报错解决
+                Utils.toast("用户名不合法")
+                return false
+            }
+            if (user.password?.length?:0<4) {//报错解决
+//                Utils.toast("密码不合法")
+                Utils.toast("密码不合法",2000)
+                return false
+            }
+            return true
+        }
+        if (verify()) {
             CacheUtils.save(usernameKey, username)
             CacheUtils.save(passwordKey, password)
             startActivity(Intent(this, LessonActivity::class.java))
         }
+
     }
 
-    private fun verify(user: User): Boolean {
-        if (user.username == null || user.username!!.length < 4) {//报错解决
-            Utils.toast("用户名不合法")
-            return false
-        }
-        if (user.password == null || user.password!!.length < 4) {//报错解决
-            Utils.toast("密码不合法")
-            return false
-        }
-        return true
-    }
+
 
 }

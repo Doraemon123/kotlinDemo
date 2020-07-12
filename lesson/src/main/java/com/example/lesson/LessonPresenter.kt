@@ -37,11 +37,26 @@ class LessonPresenter {
 
     fun showPlayback() {
         val playbackLessons: MutableList<Lesson> = ArrayList()
-        for (lesson in lessons) { //in -- java中 :
-            if (lesson.getState() === Lesson.State.PLAYBACK) {
-                playbackLessons.add(lesson)
-            }
-        }
+//        for (lesson in lessons) { //in -- java中 for(lesson:lessons)
+//            if (lesson.state === Lesson.State.PLAYBACK) {
+//                playbackLessons.add(lesson)
+//            }
+//        }
+        //1.
+//        lessons.forEach({lesson->
+//            if (lesson.state === Lesson.State.PLAYBACK) {
+//                playbackLessons.add(lesson)
+//            }
+//        })
+        //2.上面lambda简化写法
+//        lessons.forEach {//只有一个参数时 参数也可以省略 默认it
+//            if (it.state === Lesson.State.PLAYBACK) {
+//                playbackLessons.add(it)
+//            }
+//        }
+        //3.终极filter写法
+        playbackLessons.addAll(lessons.filter { it.state === Lesson.State.PLAYBACK })
+
         activity!!.showResult(playbackLessons)
     }
 }
